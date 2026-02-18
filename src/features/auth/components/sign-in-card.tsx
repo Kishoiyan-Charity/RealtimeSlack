@@ -1,5 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+// import { useAuthActions } from "@convex-dev/auth/react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
 import {
