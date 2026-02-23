@@ -11,12 +11,30 @@ import {
 import { useCreteWorkspaceModal } from "@/features/workspaces/store/use-create-workspace-modal";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCreateWorkspace } from "../api/use-create-workspaces";
 
 export const CreateWorkspaceModal = () => {
   const [open, setOpen] = useCreteWorkspaceModal();
 
+  const { mutate } = useCreateWorkspace();
+
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSumit = () => {
+    mutate(
+      {
+        name: "Workspace 1",
+      },
+      {
+        onSuccess(data) {
+          router.push("/workspaces/${data");
+        },
+        onError: () => {},
+        onSettled: () => {},
+      }
+    );
   };
 
   return (
