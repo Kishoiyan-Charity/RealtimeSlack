@@ -1,8 +1,27 @@
 import { useWorkspaceId } from "@/hooks/use-worksapce-id";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
-import { AlertTriangle, Loader } from "lucide-react";
+import {
+  AlertTriangle,
+  HashIcon,
+  Loader,
+  MessageSquareText,
+  SendHorizontal,
+} from "lucide-react";
 import { WorkspaceHeader } from "@/app/workspace/[workspaceId]/workspace-header";
+import { SidebarItem } from "@/app/workspace/[workspaceId]/sidebar-item";
+import { useGetChannels } from "@/features/channels/api/use-get-channels";
+import { ReactNode } from "react";
+import { WorkspaceSection } from "@/app/workspace/[workspaceId]/workspace-section";
+
+// function WorkspaceSection(props: {
+//   label: string;
+//   hint: string;
+//   onNew: () => void;
+//   children: ReactNode;
+// }) {
+//   return null;
+// }
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
@@ -12,6 +31,9 @@ export const WorkspaceSidebar = () => {
   });
   const { data: workspace, isLoading: workspaceLoading } = useGetWorkspace({
     id: workspaceId,
+  });
+  const { data: channels, isLoading: channelsIsLoading } = useGetChannels({
+    workspaceId,
   });
 
   if (workspaceLoading || memberLoading) {
@@ -37,6 +59,21 @@ export const WorkspaceSidebar = () => {
         workspace={workspace}
         isAdmin={member.role === "admin"}
       />
+      <div className="flex flex-col px-2 mt-3">
+        <SidebarItem label="Threads" icon={MessageSquareText} id="threads" />
+        <SidebarItem label="Drafts & Send" icon={SendHorizontal} id="drafts" />
+
+        <WorkspaceSection label="Channels" hint="New channel" onNew={() => {}}>
+          {channels?.map((item) => (
+            <SidebarItem
+              key={item._id}
+              icon={HashIcon}
+              label={item.name}
+              id={item._id}
+            />
+          ))}
+        </WorkspaceSection>
+      </div>
     </div>
   );
 };
