@@ -2,6 +2,7 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -9,15 +10,28 @@ import {
 interface InviteModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  name: string;
+  joinCode: string;
 }
 
-export const InviteModal = ({ open, setOpen }: InviteModalProps) => {
+export const InviteModal = ({
+  open,
+  setOpen,
+  joinCode,
+  name,
+}: InviteModalProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Invite people to your workspace</DialogTitle>
+          <DialogTitle>Invite people to {name}</DialogTitle>
+          <DialogDescription>
+            Use the code bellow to invite people to your workspace
+          </DialogDescription>
         </DialogHeader>
+        <div className="flex flex-col gap-y-4 items-center justify-center py-10">
+          <p>{joinCode}</p>
+        </div>
       </DialogContent>
     </Dialog>
   );
