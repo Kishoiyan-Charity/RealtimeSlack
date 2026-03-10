@@ -13,7 +13,7 @@ import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspa
 import { useRemoveWorkspace } from "@/features/workspaces/api/use-remove-workspace";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useWorkspaceId } from "@/hooks/use-worksapce-id";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
