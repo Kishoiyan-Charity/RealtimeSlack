@@ -2,7 +2,7 @@ import { IconType } from "react-icons/lib";
 import { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useWorkspaceId } from "@/hooks/use-worksapce-id";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ const sidebarItemVariants = cva(
     variants: {
       variant: {
         default: "text-[#f9edffcc]",
-        active: "text-[#481349] bg-white/90 hover:bg-white/9o",
+        active: "text-[#481349] bg-white/90 hover:bg-white/90",
       },
     },
     defaultVariants: {
