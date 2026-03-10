@@ -1,4 +1,3 @@
-import { useWorkspaceId } from "@/hooks/use-worksapce-id";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import {
@@ -11,13 +10,15 @@ import {
 import { WorkspaceHeader } from "@/app/workspace/[workspaceId]/workspace-header";
 import { SidebarItem } from "@/app/workspace/[workspaceId]/sidebar-item";
 import { useGetChannels } from "@/features/channels/api/use-get-channels";
-import { ReactNode } from "react";
 import { WorkspaceSection } from "@/app/workspace/[workspaceId]/workspace-section";
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import { UserItem } from "@/app/workspace/[workspaceId]/user-item";
 import { useCreteChannelModal } from "@/features/channels/store/use-create-channel-modal";
+import { useChannelId } from "@/hooks/use-channel-id";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 export const WorkspaceSidebar = () => {
+  const channelId = useChannelId();
   const workspaceId = useWorkspaceId();
   const [_open, setOpen] = useCreteChannelModal();
 
@@ -74,6 +75,7 @@ export const WorkspaceSidebar = () => {
             icon={HashIcon}
             label={item.name}
             id={item._id}
+            variant={channelId === item._id ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>
