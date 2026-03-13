@@ -1,6 +1,9 @@
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 import Quill from "quill";
+import { useCreateMessage } from "@/features/messages/api/use-create-message";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useChannelId } from "@/hooks/use-channel-id";
 
 interface ChatInputProps {
   placeholder?: string;
@@ -9,6 +12,11 @@ interface ChatInputProps {
 const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
 
 export const ChatInput = ({ placeholder }: ChatInputProps) => {
+  const workspaceId = useWorkspaceId();
+  const channelId = useChannelId();
+
+  const { mutate: createMessage } = useCreateMessage();
+
   const editorRef = useRef<Quill | null>(null);
 
   const handleSubmit = ({
@@ -19,6 +27,12 @@ export const ChatInput = ({ placeholder }: ChatInputProps) => {
     image: File | null;
   }) => {
     console.log({ body, image });
+
+    createMessage({
+      workspaceId,
+      channelId,
+      body,
+    });
   };
 
   return (
