@@ -10,6 +10,7 @@ type RequestType = {
   workspaceId: Id<"workspaces">;
   channelId?: Id<"channels">;
   parentChannelId?: Id<"messages">;
+  conversationId?: Id<"conversations">;
 };
 type ResponseType = Id<"messages"> | null;
 
