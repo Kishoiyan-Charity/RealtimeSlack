@@ -2,19 +2,18 @@ import { useMutation } from "convex/react";
 import { useCallback, useMemo, useState } from "react";
 
 import { api } from "../../../../convex/_generated/api";
-import { Id, Doc } from "../../../../convex/_generated/dataModel";
 
-// type ResponseType = Id<"workspaces"> | null;
+type ResponseType = string | null;
 
 type Options = {
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: ResponseType) => void;
   onError?: (error: Error) => void;
   onSettled?: () => void;
   throwError?: boolean;
 };
 
 export const useGenerateUploadUrl = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<ResponseType>(null);
   const [error, setError] = useState<Error | null>(null);
   const [status, setStatus] = useState<
     "success" | "error" | "settled" | "pending" | null
