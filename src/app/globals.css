@@ -114,7 +114,7 @@ body,
 .ql-editor a:hover {
   text-decoration: underline !important;
 }
-.ql-render{
+.ql-renderer{
   padding: 0 !important;
 }
 .ql-editor:before{
@@ -125,4 +125,9 @@ body,
   font-size: 14px !important;
   font-weight: 400 !important;
   @apply truncate;
+}
+
+.messages-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #dcdcdc #f8f8f8;
 }
