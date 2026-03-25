@@ -3,6 +3,7 @@ import { Doc, Id } from "../../convex/_generated/dataModel";
 import { format, isToday, isYesterday } from "date-fns";
 import { Hint } from "@/components/hint";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Thumbnail } from "@/components/thumbnail";
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false });
 
@@ -65,6 +66,9 @@ const Message = ({
           </Hint>
           <div className="flex flex-col w-full">
             <Renderer value={body} />
+            {updatedAt ? (
+              <span className="text-xs text-muted-foreground">(edited)</span>
+            ) : null}
           </div>
         </div>
       </div>
@@ -74,10 +78,10 @@ const Message = ({
   const avatarFallback = authorName.charAt(0).toUpperCase();
 
   return (
-    <div className="flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative">
+    <div className="flex  gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative">
       <div className="flex items-start gap-2">
         <button>
-          <Avatar className="size-5 rounded-md mr-1">
+          <Avatar className="size-6 rounded-md ">
             <AvatarImage className="rounded-md" src={authorImage} />
             <AvatarFallback className=" rounded-md bg-sky-500 text-white text-xs">
               {avatarFallback}
@@ -102,6 +106,7 @@ const Message = ({
           </Hint>
         </div>
         <Renderer value={body} />
+        <Thumbnail url={image} />
         {updatedAt ? (
           <span className="text-xs text-muted-foreground">(edited)</span>
         ) : null}
