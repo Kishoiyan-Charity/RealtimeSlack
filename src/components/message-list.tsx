@@ -72,7 +72,9 @@ export const MessageList = ({
               {formatDateLabel(dateKey)}
             </span>
           </div>
+
           {messages.map((message: any, index: any) => {
+            // @ts-ignore
             const prevMessage = messages[index - 1];
             const isCompact =
               prevMessage &&
@@ -109,11 +111,7 @@ export const MessageList = ({
           })}
         </div>
       ))}
-      {/*<div>*/}
-      {/*  <button onClick={loadMore} className="text-sm">*/}
-      {/*    Load More...*/}
-      {/*  </button>*/}
-      {/*</div>*/}
+
       <div
         className="h-1"
         ref={(el) => {
@@ -125,6 +123,7 @@ export const MessageList = ({
             },
             { threshold: 1.0 }
           );
+          // @ts-ignore
           observer.observe(el);
           return () => observer.disconnect();
         }}
