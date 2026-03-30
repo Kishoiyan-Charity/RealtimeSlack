@@ -15,6 +15,7 @@ import { useToggleReaction } from "@/features/reactions/api/use-toggle-reaction"
 import { Reactions } from "@/components/reactions";
 import { usePanel } from "@/hooks/use-panel";
 import { useParentMessageId } from "@/features/messages/store/use-parent-message-id";
+import { ThreadBar } from "@/components/thread-bar";
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false });
 const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
@@ -171,6 +172,12 @@ export const Message = ({
                 ) : null}
 
                 <Reactions data={reactions} onChange={handleReaction} />
+                <ThreadBar
+                  count={threadCount}
+                  image={threadImage}
+                  timestamp={threadTimestamp}
+                  // onClick={() => onOpenMessage(id)} // ✅ add this
+                />
               </div>
             )}
           </div>
@@ -246,6 +253,12 @@ export const Message = ({
                 <span className="text-xs text-muted-foreground">(edited)</span>
               ) : null}
               <Reactions data={reactions} onChange={handleReaction} />
+
+              <ThreadBar
+                count={threadCount}
+                image={threadImage}
+                timestamp={threadTimestamp}
+              />
             </div>
           )}
         </div>
