@@ -9,6 +9,7 @@ import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { Message } from "@/components/message";
 import { Loader } from "lucide-react";
 import entry from "next/dist/server/typescript/rules/entry";
+import { ConversationHero } from "@/components/conversation-hero";
 
 const TIME_THRESHOLD = 5;
 
@@ -138,6 +139,10 @@ export const MessageList = ({
       )}
       {variant === "channel" && channelName && channelCreationTime && (
         <ChannelHero name={channelName} creationTime={channelCreationTime} />
+      )}
+
+      {variant === "conversation" && memberName && (
+        <ConversationHero name={memberName} image={memberImage} />
       )}
     </div>
   );
