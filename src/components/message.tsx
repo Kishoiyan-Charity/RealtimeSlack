@@ -15,7 +15,7 @@ import { useToggleReaction } from "@/features/reactions/api/use-toggle-reaction"
 import { Reactions } from "@/components/reactions";
 import { usePanel } from "@/hooks/use-panel";
 import { useParentMessageId } from "@/features/messages/store/use-parent-message-id";
-import { ThreadBar } from "@/components/thread-bar";
+import { ThreadBar } from "./thread-bar";
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false });
 const Editor = dynamic(() => import("@/components/editor"), { ssr: false });
@@ -176,7 +176,7 @@ export const Message = ({
                   count={threadCount}
                   image={threadImage}
                   timestamp={threadTimestamp}
-                  // onClick={() => onOpenMessage(id)} // ✅ add this
+                  onClick={() => onOpenMessage(id)} // ✅ add this
                 />
               </div>
             )}
@@ -258,6 +258,7 @@ export const Message = ({
                 count={threadCount}
                 image={threadImage}
                 timestamp={threadTimestamp}
+                onClick={() => onOpenMessage(id)} // ✅ add this
               />
             </div>
           )}
