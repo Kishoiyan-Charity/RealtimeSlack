@@ -42,6 +42,7 @@ interface MessageProps {
   hideThreadButton?: boolean;
   threadCount?: number;
   threadImage?: string;
+  threadName?: string;
   threadTimestamp?: number;
 }
 
@@ -66,9 +67,10 @@ export const Message = ({
   hideThreadButton,
   threadCount,
   threadImage,
+  threadName,
   threadTimestamp,
 }: MessageProps) => {
-  const { parentMessageId, onOpenMessage, onClose } = usePanel();
+  const { parentMessageId, onOpenMessage, onOpenProfile, onClose } = usePanel();
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete message",
     "Are you sure you want to delete message? This action cannot be undone."
@@ -83,7 +85,7 @@ export const Message = ({
   const { mutate: toggleReaction, isPending: isTogglingReaction } =
     useToggleReaction();
 
-  const isPending = useUpdateMessage;
+  const isPending = useUpdateMessage || isTogglingReaction;
 
   const handleReaction = (value: string) => {
     toggleReaction(
@@ -175,8 +177,9 @@ export const Message = ({
                 <ThreadBar
                   count={threadCount}
                   image={threadImage}
+                  name={threadName}
                   timestamp={threadTimestamp}
-                  onClick={() => onOpenMessage(id)} // ✅ add this
+                  onClick={() => onOpenMessage(id)}
                 />
               </div>
             )}
@@ -199,6 +202,12 @@ export const Message = ({
 
   const avatarFallback = authorName.charAt(0).toUpperCase();
 
+  console.log("22222THREAD DATA 22:", {
+    threadCount,
+    threadImage,
+    threadTimestamp,
+  });
+
   return (
     <>
       <ConfirmDialog />
@@ -211,7 +220,7 @@ export const Message = ({
         )}
       >
         <div className="flex items-start gap-2">
-          <button>
+          <button onClick={() => onOpenProfile(memberId)}>
             <Avatar className="size-6 rounded-md ">
               <AvatarImage className="rounded-md" src={authorImage} />
               <AvatarFallback className=" rounded-md bg-sky-500 text-white text-xs">
@@ -234,7 +243,7 @@ export const Message = ({
             <div className="flex flex-col w-full overflow-hidden">
               <div className="text-sm">
                 <button
-                  onClick={() => {}}
+                  onClick={() => onOpenProfile(memberId)}
                   className="font-bold text-primary hover:underline"
                 >
                   {authorName}
@@ -257,8 +266,9 @@ export const Message = ({
               <ThreadBar
                 count={threadCount}
                 image={threadImage}
+                name={threadName}
                 timestamp={threadTimestamp}
-                onClick={() => onOpenMessage(id)} // ✅ add this
+                onClick={() => onOpenMessage(id)}
               />
             </div>
           )}
