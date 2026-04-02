@@ -3,7 +3,6 @@ import Image from "next/image";
 import VerificationInput from "react-verification-input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useWorkspaceId } from "@/hooks/use-worksapce-id";
 import { useGetWorkspaceInfo } from "@/features/workspaces/api/use-get-workspace-info";
 import { Loader } from "lucide-react";
 import { useJoin } from "@/features/workspaces/api/use-join";
@@ -11,6 +10,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useEffect, useMemo } from "react";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 interface JoinPageProps {
   params: {
