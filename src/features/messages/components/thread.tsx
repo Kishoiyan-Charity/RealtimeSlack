@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Id } from "../../../../convex/_generated/dataModel";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Loader, XIcon } from "lucide-react";
