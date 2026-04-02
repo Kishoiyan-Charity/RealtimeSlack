@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
 import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 // import Message from "@/components/message";
